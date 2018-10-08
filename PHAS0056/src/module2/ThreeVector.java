@@ -5,36 +5,33 @@ public class ThreeVector {
 	public static void main(String[] args) {
 		
 	}
-	private double X;
-	private double Y;
-	private double Z;
+	
+	// member variables
+	private double x;
+	private double y;
+	private double z;
+	
+	//constructors (both for an empty ThreeVector and a defined one)
 	public ThreeVector() {}
-	
-	void setX(double x) {
-		X = x;
-	}
-	void setY(double y) {
-		Y = y;
-	}
-	void setZ(double z) {
-		Z = z;
+	public ThreeVector(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 	
-	double getX() {
-		return X;
-	}
-	double getY() {
-		return Y;
-	}
-	double getZ() {
-		return Z;
-	}
-	double magnitude() {
-		double mag = Math.sqrt(X*X+Y*Y+Z*Z);
+	//method for calculating the magnitude of a ThreeVector
+	double magnitude() { 												   //magnitude is a number
+		double mag = Math.sqrt(this.x*this.x+this.y*this.y+this.z*this.z); //calculation
 		return mag;
 	}
-	ThreeVector unitvector(ThreeVector vector) {
-		ThreeVector unit;
-		unit.setX((vector.getX()/vector.magnitude()));
+	
+	//method for finding the unit vector of a ThreeVector
+	ThreeVector unitvector() {											   //a unit vector is a ThreeVector
+		double magVector = this.magnitude();							   
+		
+		return new ThreeVector(this.x/magVector,this.y/magVector,this.z/magVector); //components are scaled by magnitude
+	}
+	String toString() {
+		
 	}
 }

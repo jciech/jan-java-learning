@@ -3,6 +3,7 @@ package module1;
 public class AlgorithmControl {
 
 	public static void main(String[] args) {
+	
 	System.out.println(timer(10000, 1000));
 	System.out.println(timer(10000, 50000));
 	System.out.println("If the value of the number of loops completed is output less often, more iterations of the loop can be processed, as the processor uses less time on returning values.");
