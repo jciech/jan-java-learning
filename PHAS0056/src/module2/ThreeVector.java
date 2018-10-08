@@ -49,7 +49,7 @@ public class ThreeVector {
 	//method for finding vector products between vectors vec1 and vec2
 	public static ThreeVector vectorProduct(ThreeVector vec1, ThreeVector vec2) {
 		return new ThreeVector(vec1.y*vec2.z-vec1.z*vec2.y,vec1.z*vec2.x-vec1.x*vec2.z,vec1.x*vec2.y-vec1.y*vec2.z);
-		//the above code constructs a new vector as per the standard perscription in 3 dimensions
+		//the above code constructs a new vector as per the standard prescription in 3 dimensions
 	}
 	
 	//method for adding vectors together
