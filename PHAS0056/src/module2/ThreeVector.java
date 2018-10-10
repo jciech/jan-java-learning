@@ -7,17 +7,18 @@ public class ThreeVector {
 	}
 	
 	// member variables
-	private double x;
-	private double y;
-	private double z;
+	double x;
+	double y;
+	double z;
 	
-	//constructors (both for an empty ThreeVector and a defined one)
+	//constructors 
 	public ThreeVector() {}
 	public ThreeVector(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 	}
+		
 	
 	//method for calculating the magnitude of a ThreeVector
 	double magnitude() { 												   //magnitude is a number
@@ -34,7 +35,7 @@ public class ThreeVector {
 	
 	//method for listing elements of ThreeVector as string
 	public String toString() {
-		return "x = " + this.x + ", y = " + this.y + ", z = " + this.z;
+		return "(" + this.x + "," + this.y + "," + this.z + ")";
 		
 	}
 	
@@ -42,7 +43,7 @@ public class ThreeVector {
 	
 	//method for finding scalar product between vectors vec1 and vec2
 	public static double scalarProduct(ThreeVector vec1, ThreeVector vec2) {
-		double dot = vec1.x*vec2.x+vec1.y*vec2.y+vec1.z+vec2.z;
+		double dot = vec1.x*vec2.x+vec1.y*vec2.y+vec1.z*vec2.z;
 		return dot;
 	}
 	
