@@ -51,7 +51,7 @@ public class Complex {
 		return false;	
 	}
 	public String toString(){
-		return this.re+"+ i"+this.im;
+		return this.re+" + "+this.im+" i";
 	}
 	
 	//setting up method to create complex number from modulus and angle arguments
