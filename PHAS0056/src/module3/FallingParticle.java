@@ -1,4 +1,4 @@
-package module2;
+package module3;
 
 public class FallingParticle {
 
@@ -17,15 +17,24 @@ public class FallingParticle {
 	
 	//constructors
 	public FallingParticle() {}
-	public FallingParticle(double m,double d) {
-			this.m = m;
+	public FallingParticle(double m,double d) throws Exception {
+			if(m<0) {
+				throw new Exception("The mass of the falling particle cannot be negative");
+			}
+			if(d<0) {
+				throw new Exception("Negative drag coefficients are non physical");
+			}
+		 	this.m = m;
 			this.d = d;
 			this.v = 0;
 			this.t = 0;
 	}
 	//setting up methods to update and retrieve height, velocity, position, and time elapsed
 	//as neeeded
-	public void setH(double height) {
+	public void setH(double height) throws Exception {
+		if(height<0) {
+			throw new Exception("Height cannot be deined as a negative value");
+		}
 		this.h = height;
 	}
 	
@@ -33,7 +42,10 @@ public class FallingParticle {
 		return this.z;
 	}
 	
-	public void setV(double velocity) {
+	public void setV(double velocity) throws Exception {
+		if(Math.abs(velocity)>3000000000.0) {
+			throw new Exception("The velocity of an object cannot surpass the speed of light");
+		}
 		this.v = velocity;
 	}
 	
@@ -65,7 +77,11 @@ public class FallingParticle {
 	public void drop(double deltaT) {
 		this.z = this.h;
 		this.t = 0;
-		setV(0);
+		try {
+			setV(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		while( this.z > 0) {
 			doTimeStep(deltaT);
