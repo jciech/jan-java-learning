@@ -9,10 +9,10 @@ public class FallingParticle {
 	//defining variables
 	double m; 
 	double d; 
-	static double t;
-	static double z;
-	static double h;  
-	static double v;
+	double t;
+	double z;
+	double h;  
+	double v;
 	static final double g = 9.8; //value of g will not change and is independent
 	
 	//constructors
@@ -20,43 +20,59 @@ public class FallingParticle {
 	public FallingParticle(double m,double d) {
 			this.m = m;
 			this.d = d;
-			FallingParticle.h = 0;
-			FallingParticle.z = h;
-			FallingParticle.t = 0;
-			FallingParticle.v = 0;
+			this.v = 0;
+			this.t = 0;
 	}
 	//setting up methods to update and retrieve height, velocity, position, and time elapsed
 	//as neeeded
 	public static void setH(double height) {
-		FallingParticle.h = height;
+		this.h = height;
 	}
 	
 	public static double getZ() {
-		return FallingParticle.z;
+		return this.z;
 	}
 	
 	public static void setV(double velocity) {
-		FallingParticle.v = velocity;
+		this.v = velocity;
 	}
 	
 	public static double getV() {
-		return FallingParticle.v;
+		return this.v;
 	}
 	
 	public double getT() {
-		return FallingParticle.t;
+		return this.t;
 	}
 	
 	public void doTimeStep(double deltaT) {
-		double a = ((this.d * FallingParticle.v * FallingParticle.v)/this.m) - g;
-		FallingParticle.setV(a * deltaT);
-		FallingParticle.setH(FallingParticle.getV() * deltaT);
-		FallingParticle.z = FallingParticle.h;
-	}
-	
-	public static void drop(double deltaT) {
-		while (FallingParticle.getZ()>=0) {
-			
+		double drag = this.d;
+		if (getV()>0) {
+			drag = -this.d;
 		}
+		double accel = ((this.v*this.v*drag)/this.m) - FallingParticle.g;
+		
+		double deltaV = accel*deltaT;
+		this.v += deltaV;
+		
+		double deltaZ = this.v*deltaT;
+		this.z += deltaZ;
+		
+		this.t += deltaT;
+	}
+		
+	
+	public void drop(double deltaT) {
+		this.z = this.h;
+		this.t = 0;
+		setV(0);
+		
+		while( this.z > 0) {
+			doTimeStep(deltaT);
+		}
+		System.out.println("Time step: "+deltaT+" s; Final position: "+getZ()+" m");
+		System.out.println("Final time = "+getT()+" s; Final velocity = "+getV()+" m/s");
+		System.out.println();
+
 	}
 }
