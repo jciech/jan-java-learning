@@ -28,7 +28,7 @@ public class ThreeVector {
 	
 	//method for finding the unit vector of a ThreeVector
 	ThreeVector unitvector() throws Exception {											   //a unit vector is a ThreeVector
-		if(this==new ThreeVector(0,0,0)) {
+		if(this.x==0&&this.y==0&&this.z==0) {
 			throw new Exception("The unit vector of the zero vector cannot be found");
 		}
 		double magVector = this.magnitude();							   
@@ -63,7 +63,7 @@ public class ThreeVector {
 	
 	//method for finding the angle between two vectors using methods defined above
 	public static double angle(ThreeVector vec1, ThreeVector vec2) throws Exception {
-		if(vec1==new ThreeVector(0,0,0)||vec2==new ThreeVector(0,0,0)) {
+		if((vec1.x==0&&vec1.y==0&&vec1.z==0)||(vec2.x==0&&vec2.y==0&&vec2.z==0)) {
 			throw new Exception("The angle between a vector and the zero vector is undefined");
 		}
 		double ang = Math.acos(scalarProduct(vec1, vec2)/(vec1.magnitude()*vec2.magnitude()));

@@ -43,7 +43,7 @@ public class Complex {
 	}
 	public Complex normalised() throws Exception {
 		if(this.modulus()==0) {
-			throw new Exception("A vector of length zero cannot be normalised");
+			throw new Exception("Zero cannot be normalised in C");
 		}
 		double mod = this.modulus();
 		return new Complex(this.re/mod,this.im/mod);
@@ -76,7 +76,7 @@ public class Complex {
 																     //complex multiplication
 	}
 	public static Complex divide(Complex a, Complex b) throws Exception {
-		if(b==Complex.ZERO()) {
+		if(b.im==0&&b.re==0) {
 			throw new Exception("Division by zero is undefined");
 		}
 		return new Complex((a.re*b.re+a.im*b.im)/(b.re*b.re+b.im*b.im),(a.im*b.re-a.re*b.im)/(b.re*b.re+b.im*b.im));
