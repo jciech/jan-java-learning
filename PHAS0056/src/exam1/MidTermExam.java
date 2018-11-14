@@ -14,8 +14,14 @@ public class MidTermExam {
 	public static void main(String[] args) {
 
 		String dataURL = "http://www.hep.ucl.ac.uk/undergrad/3459/exam-data/NFL2012OffensiveStats.txt";
-		ArrayList<Data> fb = fromURL(dataURL);
-		System.out.println(fb.size());
+		ArrayList<Data> fb;
+		try {
+			fb = fromURL(dataURL);
+			System.out.println(fb.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 
@@ -57,5 +63,7 @@ public class MidTermExam {
 			s.nextLine();
 
 		}
+		s.close();
 		return dat;
 	}
+}
