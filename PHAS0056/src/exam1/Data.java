@@ -4,17 +4,19 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Data {
-	private int Att, RuYds, RuTD, Tgt, Rec, ReYds,ReTD, Fmb ;
+	private int Games, Att, RuYds, RuTD, Tgt, Rec, ReYds,ReTD, Fmb;
 	private String Name, Team, Pos;
 
 	// Class constructor: sets all int type values
-	public Data(String Name, String Team, String Pos, int Att, int RuYds, int RuTD, int Tgt, int Rec, int ReYds, int ReTD, int Fmb) {
+	public Data(String Name, String Team, String Pos, int Games, int Att, int RuYds, int RuTD, int Tgt, int Rec, int ReYds, int ReTD, int Fmb) {
 		this.Name = Name;
 		this.Team = Team;
 		this.Pos = Pos;
+		this.Games = Games;
 		this.Att = Att;
 		this.RuYds = RuYds;
 		this.RuTD = RuTD;
@@ -40,6 +42,11 @@ public class Data {
 		return this.Pos;
 	}
 
+	//Method for retrieving Games variable
+	
+	public int getGames() {
+		return this.Games;
+	}
 	// Method for retrieving Att variable
 	public int getAtt() {
 		return this.Att;
@@ -79,37 +86,10 @@ public class Data {
 	public int getFmb() {
 		return this.Fmb;
 	}
+	
+	public String toString() {
+		String datString = "Name: "+this.Name+"; Team:"+this.Team+"; Position:"+this.Pos+"; Games:"+this.Games+"; Rushing Attempts:"+this.Att+"; Rushing Yards:"+this.RuYds+"; Rushing Touchdowns:"+this.RuTD+"; Targeted:"+this.Tgt+"; Receptions:"+this.Rec+"; Recieving Yards:"+this.ReYds+"; Recieving Touchdowns:"+this.ReTD+"; Fumbles:"+this.Fmb;
+		return datString;
 
-	// Parse data from url 
-	// Throws Exception if data not parsed correctly
-	public static Data fromURL(String urlName) throws Exception {
-
-		//open data from URL
-		URL u = new URL(urlName);
-		InputStream is = u.openStream();
-		InputStreamReader isr = new InputStreamReader(is);
-		BufferedReader br = new BufferedReader(isr);
-		
-		//create array of data points
-		
-		
-		// Instantiate Scanner from input String
-		Scanner s = new Scanner(br).useDelimiter("\t");
-		while (s.hasNext()) {
-			String Name = s.next();
-			String Team = s.next();
-			String Pos = s.next();
-			int Att = s.nextInt();
-			int RuYds = s.nextInt();
-			int RuTD = s.nextInt();
-			int Tgt = s.nextInt();
-			int Rec = s.nextInt();
-			int ReYds = s.nextInt();
-			int ReTD = s.nextInt();
-			int Fmb = s.nextInt();
-
-			return new Data(Name, Team, Pos, Att, RuYds, RuTD, Tgt, Rec, ReYds,ReTD, Fmb);
-			s.nextLine();
-		}
-	}
+	
 }
