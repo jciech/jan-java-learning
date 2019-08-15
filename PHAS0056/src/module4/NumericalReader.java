@@ -8,7 +8,7 @@ public class NumericalReader {
 
 	// Creating variables which are later used in methods
 	private double minPositiveValue;
-	private String file;
+	static String file;
 	private int nPositiveValues, nNegativeValues;
 
 	// Method which prompts the user to enter a string via the keyboard
@@ -31,7 +31,7 @@ public class NumericalReader {
 
 	// The method below takes as an argument an URL in the form of a string and
 	// returns a BufferedReader object
-	public static BufferedReader brfromURL(String urlName) throws IOException {
+	public BufferedReader brfromURL(String urlName) throws IOException {
 
 		URL u = new URL(urlName);
 		InputStream is = u.openStream();
@@ -47,7 +47,7 @@ public class NumericalReader {
 	private void analysisStart(String dataFile) throws IOException {
 
 		// Storing the dataFile variable locally when the method is called
-		this.file = dataFile;
+		file = dataFile;
 
 		// Creating a file called dataFile
 		try (FileWriter f = new FileWriter(dataFile);) {
@@ -100,12 +100,55 @@ public class NumericalReader {
 
 	// Method to print out the results of the analysis
 	private void analysisEnd() {
+
+		System.out.println();
+		System.out.println("The number of negative values in the dataset is: " + this.nNegativeValues);
+		System.out.println("The number of positive values in the dataset is: " + this.nPositiveValues);
+		System.out.println("The smallest of the numbers in the dataset is: " + this.minPositiveValue);
+		System.out.println();
+
+		String dataFile = saveFile;
+		File outputfile = new File(dataFile);
 		
-		System.out.println("The number of negative values in the dataset is: "+this.nNegativeValues);
-		System.out.println("The number of positive values in the dataset is: "+this.nPositiveValues);
-		System.out.println("The smallest of the numbers in the dataset is: "+this.minPositiveValue);
-	
+		try {
+			FileWriter fw = new FileWriter(outputfile);
+			fw.write("The number of negative values in the dataset is: " + this.nNegativeValues);
+			fw.write("The number of positive values in the dataset is: " + this.nPositiveValues);
+			fw.write("The smallest of the numbers in the dataset is: " + this.minPositiveValue);
+		}
+		catch (IOException e){
+			
+			System.out.println("Error while writing values to file");
+			e.printStackTrace();
+		}
 	}
-	
-	
+
+	public static void main(String[] args) throws Exception {
+
+		// Reading target directory from Keyboard. Exception handling is done in the
+		// method
+		String targetDirectory = NumericalReader.getStringFromKeyboard();
+		String saveFile = (targetDirectory + File.separator + file);
+		NumericalReader nr = new NumericalReader();
+		try {
+			BufferedReader reader = nr
+					.brfromURL("http://www.hep.ucl.ac.uk/undergrad/3459/data/module4/module4_data1a.txt");
+			String line = "";
+
+			nr.analysisStart(saveFile); // Instantiating the analysis
+
+			while ((line = reader.readLine()) != null) {
+				nr.analyseData(line); // Analysing each line
+			}
+			
+			
+		} catch (IOException e) {
+
+			System.out.println("Error while processing the target file");
+			e.printStackTrace();
+
+		}
+
+	}
+
 }

@@ -205,4 +205,6 @@ public class NumericalReaderOld {
 		nr2.analyseDataFromURL(dataUrlRoot+"module4_data2.txt", "numbers2.txt", saveDir);
 	}
 
+	
+
 }
