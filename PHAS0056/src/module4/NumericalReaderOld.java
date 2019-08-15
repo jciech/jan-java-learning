@@ -4,7 +4,7 @@ import java.io.*; // For BufferedReader, InputStreamReader, InputStream, FileRea
 import java.net.URL; // For URL
 import java.util.Scanner; // For Scanner
 
-public class NumericalReader {
+public class NumericalReaderOld {
 
 	// Private variables to keep track of values read in
 	private double maxValue, minValue, sumOfValues, meanValue;
@@ -198,11 +198,11 @@ public class NumericalReader {
 		String saveDir = getOutputDirectory();
 
 		// Instantiate NumericalReader object for input file, and run analysis
-		NumericalReader nr = new NumericalReader();
+		NumericalReaderOld nr = new NumericalReaderOld();
 		nr.analyseDataFromURL(dataUrlRoot+"module4_data1.txt", "numbers1.txt", saveDir);
 
-		NumericalReader nr2 = new NumericalReader();
-		nr.analyseDataFromURL(dataUrlRoot+"module4_data2.txt", "numbers2.txt", saveDir);
+		NumericalReaderOld nr2 = new NumericalReaderOld();
+		nr2.analyseDataFromURL(dataUrlRoot+"module4_data2.txt", "numbers2.txt", saveDir);
 	}
 
 }
