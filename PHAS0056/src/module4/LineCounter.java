@@ -37,16 +37,25 @@ public class LineCounter {
 	// BufferedReader object.
 	public static int countLinesInResource(BufferedReader dataAsBR) {
 
-		// Initialise word count variable
+		//Initialise word count variable
+		//Instantiating a string variable which will be used to check whether a line is empty or not
 		int countLines = 0;
-
+		String line = new String();
+		
 		// Using a try block to ensure the Scanner is closed
 		try (Scanner s = new Scanner(dataAsBR);) {
 
 			// While loop to find number of lines
 			while (s.hasNextLine()) {
-				s.nextLine();
-				countLines++;
+				line = s.nextLine();
+				//Checking if line is empty and skipping it if it is
+				if (line.trim().isEmpty()){
+				;
+				}
+				else {
+					countLines++;
+				}
+				
 			}
 		}
 		return countLines;
