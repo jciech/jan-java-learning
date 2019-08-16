@@ -49,8 +49,9 @@ public class NumericalReader {
 
 		// Storing the dataFile variable locally when the method is called
 		this.fileName = dataFile;
-
+		
 		// Creating a file called dataFile
+		File outputFile = new File(this.fileName);
 		fw = new FileWriter(this.fileName);
 
 		// Initialising private variables
@@ -109,9 +110,10 @@ public class NumericalReader {
 		System.out.println();
 
 		try {
-			fw.write("The number of negative values in the dataset is: " + this.nNegativeValues);
-			fw.write("The number of positive values in the dataset is: " + this.nPositiveValues);
-			fw.write("The smallest of the numbers in the dataset is: " + this.minPositiveValue);
+			fw.write("The number of negative values in the dataset is: " + this.nNegativeValues + "\n");
+			fw.write("The number of positive values in the dataset is: " + this.nPositiveValues + "\n");
+			fw.write("The smallest of the numbers in the dataset is: " + this.minPositiveValue + "\n");
+			fw.close();
 		} catch (IOException e) {
 
 			System.out.println("Error while writing values to file");

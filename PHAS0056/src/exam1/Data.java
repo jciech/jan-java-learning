@@ -90,6 +90,6 @@ public class Data {
 	public String toString() {
 		String datString = "Name: "+this.Name+"; Team:"+this.Team+"; Position:"+this.Pos+"; Games:"+this.Games+"; Rushing Attempts:"+this.Att+"; Rushing Yards:"+this.RuYds+"; Rushing Touchdowns:"+this.RuTD+"; Targeted:"+this.Tgt+"; Receptions:"+this.Rec+"; Recieving Yards:"+this.ReYds+"; Recieving Touchdowns:"+this.ReTD+"; Fumbles:"+this.Fmb;
 		return datString;
-
+	}
 	
 }
