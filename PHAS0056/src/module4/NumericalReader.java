@@ -8,8 +8,9 @@ public class NumericalReader {
 
 	// Creating variables which are later used in methods
 	private double minPositiveValue;
-	static String file;
+	private String fileName;
 	private int nPositiveValues, nNegativeValues;
+	public FileWriter fw;
 
 	// Method which prompts the user to enter a string via the keyboard
 	public static String getStringFromKeyboard() {
@@ -47,11 +48,10 @@ public class NumericalReader {
 	private void analysisStart(String dataFile) throws IOException {
 
 		// Storing the dataFile variable locally when the method is called
-		file = dataFile;
+		this.fileName = dataFile;
 
 		// Creating a file called dataFile
-		try (FileWriter f = new FileWriter(dataFile);) {
-		}
+		fw = new FileWriter(this.fileName);
 
 		// Initialising private variables
 		this.nNegativeValues = 0;
@@ -94,6 +94,7 @@ public class NumericalReader {
 					}
 
 				}
+
 			}
 		}
 	}
@@ -107,17 +108,12 @@ public class NumericalReader {
 		System.out.println("The smallest of the numbers in the dataset is: " + this.minPositiveValue);
 		System.out.println();
 
-		String dataFile = saveFile;
-		File outputfile = new File(dataFile);
-		
 		try {
-			FileWriter fw = new FileWriter(outputfile);
 			fw.write("The number of negative values in the dataset is: " + this.nNegativeValues);
 			fw.write("The number of positive values in the dataset is: " + this.nPositiveValues);
 			fw.write("The smallest of the numbers in the dataset is: " + this.minPositiveValue);
-		}
-		catch (IOException e){
-			
+		} catch (IOException e) {
+
 			System.out.println("Error while writing values to file");
 			e.printStackTrace();
 		}
@@ -128,27 +124,54 @@ public class NumericalReader {
 		// Reading target directory from Keyboard. Exception handling is done in the
 		// method
 		String targetDirectory = NumericalReader.getStringFromKeyboard();
-		String saveFile = (targetDirectory + File.separator + file);
+		
+		// Specifying two separate filenames for the two files to be analysed
+		String dir1 = "numbers1.txt";
+		String dir2 = "numbers2.txt";
+		String saveFile1 = (targetDirectory + File.separator + dir1);
+		String saveFile2 = (targetDirectory + File.separator + dir2);
 		NumericalReader nr = new NumericalReader();
+		
+		//Implementing the algorithm for the first URL
 		try {
 			BufferedReader reader = nr
 					.brfromURL("http://www.hep.ucl.ac.uk/undergrad/3459/data/module4/module4_data1a.txt");
 			String line = "";
 
-			nr.analysisStart(saveFile); // Instantiating the analysis
+			nr.analysisStart(saveFile1); // Instantiating the analysis
 
 			while ((line = reader.readLine()) != null) {
 				nr.analyseData(line); // Analysing each line
 			}
 			
+			nr.analysisEnd();
 			
 		} catch (IOException e) {
 
 			System.out.println("Error while processing the target file");
 			e.printStackTrace();
-
 		}
+		
+		//Implementing the algorithm for the second URL; the only differences are the URL and filename
+		try {
+			BufferedReader reader = nr
+					.brfromURL("http://www.hep.ucl.ac.uk/undergrad/3459/data/module4/module4_data2a.txt");
+			String line = "";
 
+			nr.analysisStart(saveFile2); // Instantiating the analysis
+
+			while ((line = reader.readLine()) != null) {
+				nr.analyseData(line); // Analysing each line
+			}
+			
+			nr.analysisEnd();
+			
+		} catch (IOException e) {
+
+			System.out.println("Error while processing the target file");
+			e.printStackTrace();
+		}
+		
 	}
 
 }
