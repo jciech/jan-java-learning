@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class ImageData {
 
-	int identifier, volunteerIdentifier;
+	int identifier;
 	double latitude, longitude;
 	String speciesVolunteer, speciesExpert;
 	ArrayList<String> volunteerClassifications = new ArrayList<String>();
@@ -40,7 +40,7 @@ public class ImageData {
 			while (s.hasNext()) {
 				ImageData dummyImage = new ImageData();
 				dummyImage.setIdentifier(s.nextInt());
-				dummyImage.setVolunteerIdentifier(s.nextInt());
+				s.nextInt();
 				dummyImage.setSpeciesVolunteer(s.next());
 				dummyList.add(dummyImage);
 			}
@@ -62,7 +62,7 @@ public class ImageData {
 			while (s.hasNext()) {
 				ImageData dummyImage = new ImageData();
 				dummyImage.setIdentifier(s.nextInt());
-				dummyImage.setVolunteerIdentifier(s.nextInt());
+				s.nextInt();
 				dummyImage.setSpeciesExpert(s.next());
 				dummyList.add(dummyImage);
 			}
@@ -117,18 +117,51 @@ public class ImageData {
 		return dummyList;
 	}
 
-	public static ArrayList<ImageData> collectAll(ArrayList<ImageData> atLeast10Vols, ArrayList<ImageData> expert,
-			ArrayList<ImageData> locations) {
+	public static ArrayList<ImageData> collectAll(ArrayList<ImageData> classification,
+			ArrayList<ImageData> expert, ArrayList<ImageData> locations) {
 
-		
-		return null;
+		ArrayList<ImageData> dummyList = new ArrayList<ImageData>();
+
+		for (ImageData exp : expert) {
+			ImageData dummyImage = new ImageData();
+			dummyImage.setIdentifier(exp.getIdentifier());
+			dummyImage.setSpeciesExpert(exp.getSpeciesExpert());
+			for (ImageData loc : locations) {
+				if (dummyImage.getIdentifier() == loc.getIdentifier()) {
+					dummyImage.setLatitude(loc.getLatitude());
+					dummyImage.setLongitude(loc.getLongitude());
+				}
+			}
+			for (ImageData clas : classification) {
+				if (dummyImage.getIdentifier() == clas.getIdentifier()) {
+					dummyImage.addToVolunteerClassifications(clas.speciesVolunteer);
+				}
+			}
+			dummyList.add(dummyImage);
+		}
+
+		return dummyList;
+	}
+
+
+	public static ArrayList<ImageData> clean(ArrayList<ImageData> list) {
+
+		ArrayList<ImageData> dummyList = new ArrayList<ImageData>();
+
+		for (ImageData image : list) {
+			if (image.volunteerClassifications.size() >= 10) {
+				dummyList.add(image);
+			}
+		}
+
+		return dummyList;
 	}
 
 	@Override
 	public String toString() {
-		return "ImageData [identifier=" + identifier + ", volunteerIdentifier=" + volunteerIdentifier + ", latitude="
-				+ latitude + ", longitude=" + longitude + ", speciesVolunteer=" + speciesVolunteer + ", speciesExpert="
-				+ speciesExpert + "]";
+		return "ImageData [identifier=" + identifier + ", latitude=" + latitude + ", longitude=" + longitude
+				+ ", speciesVolunteer=" + speciesVolunteer + ", speciesExpert=" + speciesExpert
+				+ ", volunteerClassifications=" + volunteerClassifications + "]" + "\n";
 	}
 
 	public int getIdentifier() {
@@ -149,14 +182,6 @@ public class ImageData {
 
 	public String getSpeciesExpert() {
 		return speciesExpert;
-	}
-
-	public int getVolunteerIdentifier() {
-		return volunteerIdentifier;
-	}
-
-	public void setVolunteerIdentifier(int volunteerIdentifier) {
-		this.volunteerIdentifier = volunteerIdentifier;
 	}
 
 	public void setIdentifier(int identifier) {
@@ -183,4 +208,11 @@ public class ImageData {
 		return volunteerClassifications;
 	}
 
+	public void setVolunteerClassifications(ArrayList<String> volunteerClassifications) {
+		this.volunteerClassifications = volunteerClassifications;
+	}
+
+	public void addToVolunteerClassifications(String species) {
+		this.volunteerClassifications.add(species);
+	}
 }

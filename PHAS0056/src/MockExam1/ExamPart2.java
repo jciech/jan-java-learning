@@ -15,16 +15,16 @@ public class ExamPart2 {
 		ArrayList<ImageData> locations = ImageData.locationsFromURL(urlLocations);
 		
 		ArrayList<ImageData> completeList = ImageData.collectAll(classification, expert, locations);
-		
+				
 		// For part 2 we use the ExpertSelector to find all lions:
-		ImageSelector lionExpertSelector = new ExpertSelector("lions");
+		ImageSelector lionExpertSelector = new ExpertSelector("lion");
 		ArrayList<ImageData> lionsList = lionExpertSelector.select(completeList);
 		
 		System.out.println(lionsList);
 		
 		// and the MajoritySelector to find all lion candidates:
 		
-		ImageSelector lionMajoritySelector = new MajoritySelector("lions");
+		ImageSelector lionMajoritySelector = new MajoritySelector("lion");
 		ArrayList<ImageData> lionsCandidateList = lionMajoritySelector.select(completeList);
 		
 		System.out.println(lionsCandidateList);		

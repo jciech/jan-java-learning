@@ -20,7 +20,7 @@ public class ExamPart1 {
 		// For part 2. we need to print the number of images
 		// This will be the length of expert list
 
-		//System.out.println(expert.size());
+		System.out.println(expert.size());
 		
 		// For part 3. we need to print the number of images classified by at least 1
 		// volunteer. We will utilise the properties of Sets in java.
@@ -40,11 +40,12 @@ public class ExamPart1 {
 		// Must merge the information from classification, locations and expert lists
 		ArrayList<ImageData> atLeast10CompleteList = new ArrayList<ImageData>();
 		atLeast10CompleteList = ImageData.collectAll(atLeast10Vols, expert, locations);
+		ArrayList<ImageData> clean10CompleteList = ImageData.clean(atLeast10CompleteList);
 		
 		// Printing out the data
 		
-		System.out.println(atLeast10CompleteList);
-		
+		System.out.println(clean10CompleteList);
+
 	}
 
 
