@@ -11,8 +11,8 @@ public class Areas {
 
 	public static HashMap<String, Double> hashMapFromURL(String string) {
 
-		HashMap<String,Double> dummyMap = new HashMap<String,Double>();
-		
+		HashMap<String, Double> dummyMap = new HashMap<String, Double>();
+
 		try {
 			BufferedReader br = Species.brfromURL(string);
 			String line;
@@ -26,8 +26,21 @@ public class Areas {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		return dummyMap;
 	}
-	
+
+	public static HashMap<String, Double> reduceAltitude(HashMap<String, Double> altitudeMap, double i) {
+
+		HashMap<String, Double> reducedList = new HashMap<String,Double>();
+		
+		for (String string : altitudeMap.keySet()) {
+			if (!(altitudeMap.get(string) < i)) {
+				reducedList.put(string, altitudeMap.get(string));
+			}
+		}
+
+		return reducedList;
+	}
+
 }

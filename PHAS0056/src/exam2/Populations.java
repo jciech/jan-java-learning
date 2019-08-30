@@ -10,6 +10,7 @@ public class Populations {
 
 	String areaId, speciesId;
 	int numberSpecimens;
+
 	
 	public static ArrayList<Populations> arrayListFromURL(String string) {
 		
@@ -79,5 +80,21 @@ public class Populations {
 	}
 
 	
+	// Method to select a subset of only specific species from all populations
+	public static ArrayList<Populations> selectSpecies(ArrayList<Populations> populations, String species) {
+
+		ArrayList<Populations> dummyList = new ArrayList<Populations>();
+		
+		for (Populations population : populations) {
+			if(population.speciesId.equals(species)) {
+				dummyList.add(population);
+			}
+		}
+		
+		return dummyList;
+	}
+
+
+
 	
 }
