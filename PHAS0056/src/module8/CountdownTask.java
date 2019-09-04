@@ -1,7 +1,6 @@
 package module8;
 
 public class CountdownTask implements Runnable {
-
 	int runtime;
 
 	public CountdownTask(int runtime) {
